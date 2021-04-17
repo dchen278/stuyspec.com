@@ -16,7 +16,7 @@ const styles = {
     paddingTop: "20px",
     display: "flex",
     flexDirection: "column",
-    paddingBottom: "3%",
+    paddingBottom: "0%",
   },
   theSpectatorLogo: {
     flexGrow: "2",
@@ -24,7 +24,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    fontFamily: "Mrs Eaves Small Caps",
+    fontFamily: "Old English Text MT",
     fontSize: "8rem",
     marginBottom: "10px",
     "&:hover, &:active, &:focus": {
@@ -32,7 +32,7 @@ const styles = {
       textDecoration: "none",
     },
     "@media (min-width: 768px)": {
-      fontSize: "75px",
+      fontSize: "65px"
     },
   },
   userTools: {
@@ -50,7 +50,9 @@ const styles = {
   },
   FeaturedSectionsBarContainer: {
     borderTop: "1px solid black",
-    width: "107%",
+    borderBottom: "1px solid gray",
+    width: "100%",
+    marginBottom: "2rem",
   },
   myAccount: {
     display: "inline",
@@ -124,6 +126,7 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
       <div className={classes.FeaturedSectionsBarContainer}>
         <FeaturedSectionsBar />
       </div>
+
     </Grid>
   );
 };
