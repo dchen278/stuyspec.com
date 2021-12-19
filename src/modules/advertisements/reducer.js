@@ -1,7 +1,7 @@
 const initialState = [
   {
     company: "Kweller Prep",
-    filename: "kweller.jpg",
+    filename: "kweller.png",
     url: '/ad/kweller'
   },
   {
@@ -13,6 +13,11 @@ const initialState = [
     company: "The Tutorverse",
     filename: "tutorverse.jpg",
     url: '/ad/tutorverse'
+  },
+  {
+    company: "Manhattan Ace",
+    filename: "manhattanace.png",
+    url: "/ad/manhattanace"
   }  
 ];
 

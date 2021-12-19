@@ -8,6 +8,7 @@ import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
 import MobileNavButton from "./MobileNavButton";
 import { FeaturedSectionsBar } from "../../sections/components";
+import DarkModeToggle from "./DarkModeToggle";
 
 import { openSubscriptionModal } from "../../accounts/actions";
 
@@ -23,7 +24,7 @@ const styles = {
     zIndex: 1000,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   barContainer: {
     display: "flex",
@@ -42,6 +43,11 @@ const styles = {
       left: "-10px",
     },
   },
+  DarkModeToggle: {
+    position: "relative",
+    right: "75px",
+    bottom: "-25px",
+  },
   brandingLink: {
     bottom: "5px",
     color: "#000",
@@ -52,7 +58,7 @@ const styles = {
       color: "#000",
       textDecoration: "none",
     },
-      marginLeft:"40px",
+    marginLeft: "40px",
   },
   navButtons: {
     marginTop: "20px",
@@ -99,10 +105,10 @@ const styles = {
     display: "flex",
     justifyContent: "center",
   },
-  "@media (max-width: 1100px)": {
+  "@media (max-width: 1300px)": {
     MastheadBar: {
       height: "52px",
-      flexDirection: "row"
+      flexDirection: "row",
     },
     sectionsBarContainer: {
       display: "none",
@@ -110,6 +116,12 @@ const styles = {
     navButtons: {
       display: "none",
     },
+    // DarkModeToggle: {
+    //   display: "block",
+    //   marginBottom: '27px',
+    //   position: 'absolute',
+    //   left: '-35vw'
+    // },
   },
   "@media (max-width: 375px)": {
     brandingLink: {
@@ -142,12 +154,12 @@ const MastheadBar = ({
             ) : (
               <Link to="/myaccount">Log In</Link>
             )*/}
-            <span
-              className={classes.subscriber}
-              onClick={openSubscriptionModal}
-            >
-              Subscribe
-            </span>
+            <div className={classes.DarkModeToggle}>
+              <DarkModeToggle />
+            </div>
+            <a href="https://stuyspec.us4.list-manage.com/subscribe?u=d92e8c831515555b06ae9eeea&id=78d0a29c4f">
+              <span className={classes.subscriber}>Subscribe</span>
+            </a>
           </div>
           <Link to="/search" className={classes.searchLink}>
             <Search color={"#000"} />
@@ -162,14 +174,15 @@ const MastheadBar = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   session: state.accounts.session,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ openSidebar, openSubscriptionModal }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(MastheadBar),
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(injectSheet(styles)(MastheadBar));

@@ -25,19 +25,21 @@ import {
   HomePage,
   NotFoundPage,
   PageLayout,
+  ClassifiedsRedirect
 } from "./core/components";
+import {
+  Crossword1,
+  Crossword2,
+  Crossword3
+} from "./crossword";
 
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
 import { ArtistPage, ContributorPage } from "./users/components";
-
 import { createSession } from "./accounts/actions";
-
 import { RecruitmentPage } from "./recruitment/components";
-
-import { ClassifiedsRedirect } from "./core/components";
-
-import { adRedirects } from './advertisements/constants';
+import GamePage from "./games/GamePage";
+import { adRedirects } from "./advertisements/constants";
 
 const RoutingAppQuery = gql`
   query RoutingAppQuery {
@@ -63,7 +65,7 @@ class RoutingAppUnconnected extends PureComponent {
 
       // If everything we need in a session exists, create the session
       const sessionHeaders = ["client_id", "token", "uid"];
-      if (sessionHeaders.every(header => header in urlHeaders)) {
+      if (sessionHeaders.every((header) => header in urlHeaders)) {
         createSession({
           "access-token": urlHeaders.token,
           client: urlHeaders.client_id,
@@ -74,7 +76,10 @@ class RoutingAppUnconnected extends PureComponent {
   }
 
   render() {
-    const { data: { loading, error, allSections }, session } = this.props;
+    const {
+      data: { loading, error, allSections },
+      session,
+    } = this.props;
 
     const loadingIcon = document.getElementById("loading");
     if (loadingIcon && !loading) {
@@ -92,7 +97,7 @@ class RoutingAppUnconnected extends PureComponent {
           {!loading && (
             <Switch>
               <Route exact path="/" component={HomePage} />
-              {allSections.map(section => {
+              {allSections.map((section) => {
                 return (
                   <Route
                     exact
@@ -102,7 +107,7 @@ class RoutingAppUnconnected extends PureComponent {
                   />
                 );
               })}
-              {allSections.map(section => {
+              {allSections.map((section) => {
                 return (
                   <Route
                     exact
@@ -112,16 +117,18 @@ class RoutingAppUnconnected extends PureComponent {
                   />
                 );
               })}
-              {adRedirects.map(ad => {
+              {adRedirects.map((ad) => {
                 return (
                   <Route
                     path={`/ad/${ad[0]}`}
                     key={`/ad/${ad[0]}`}
-                    render={() => {window.location.replace(ad[1]); return null;}}
+                    render={() => {
+                      window.location.replace(ad[1]);
+                      return null;
+                    }}
                   />
                 );
-              })
-              }
+              })}
               <Route
                 exact
                 path={"/about/:description_slug"}
@@ -137,13 +144,23 @@ class RoutingAppUnconnected extends PureComponent {
                 exact
                 path={"/illustrators/:artist_slug"}
                 key={"illustrators"}
-                render={({match}) => <ArtistPage artist_slug={match.params.artist_slug} role_slug="illustrators" />}
+                render={({ match }) => (
+                  <ArtistPage
+                    artist_slug={match.params.artist_slug}
+                    role_slug="illustrators"
+                  />
+                )}
               />
               <Route
                 exact
                 path={"/photographers/:artist_slug"}
                 key={"photographers"}
-                render={({match}) => <ArtistPage artist_slug={match.params.artist_slug} role_slug="photographers" />}
+                render={({ match }) => (
+                  <ArtistPage
+                    artist_slug={match.params.artist_slug}
+                    role_slug="photographers"
+                  />
+                )}
               />
               <Route
                 exact
@@ -165,8 +182,9 @@ class RoutingAppUnconnected extends PureComponent {
                   session ? (
                     <Redirect to="/myaccount/profile" />
                   ) : (
-                      <SignInPage />
-                    )}
+                    <SignInPage />
+                  )
+                }
               />
               <Route
                 exact
@@ -176,22 +194,49 @@ class RoutingAppUnconnected extends PureComponent {
                   session ? (
                     <Redirect to="/myaccount/profile" />
                   ) : (
-                      <SignUpPage />
-                    )}
+                    <SignUpPage />
+                  )
+                }
+              />
+              <Route
+                exact
+                path={"/spec-games"}
+                key={"games"}
+                component={GamePage}
+              />
+              <Route
+                exact
+                path={"/winter-crossword"}
+                key={"crossword"}
+                component={Crossword1}
+              />
+              <Route
+                exact
+                path={"/clubs-and-pubs-galore"}
+                key={"crossword"}
+                component={Crossword2}
+              />
+              <Route
+                exact
+                path={"/zooming"}
+                key={"crossword"}
+                component={Crossword3}
               />
               <Route
                 exact
                 path="/myaccount/profile"
                 key={"profile"}
                 render={() =>
-                  session ? <ProfilePage /> : <Redirect to="/myaccount" />}
+                  session ? <ProfilePage /> : <Redirect to="/myaccount" />
+                }
               />
               <Route
                 exact
                 path="/myaccount/profile/edit"
                 key={"editProfile"}
                 render={() =>
-                  session ? <EditProfilePage /> : <Redirect to="/myaccount" />}
+                  session ? <EditProfilePage /> : <Redirect to="/myaccount" />
+                }
               />
               <Route
                 exact
@@ -215,15 +260,18 @@ class RoutingAppUnconnected extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   session: state.accounts.session,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ createSession }, dispatch);
 };
 
 export const RoutingApp = compose(
   graphql(RoutingAppQuery),
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(RoutingAppUnconnected);

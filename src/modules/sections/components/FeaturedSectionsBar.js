@@ -33,7 +33,7 @@ const styles = {
     margin: "0px 13px",
   },
   navSearchButton: {
-    top: "-1px",
+    top: "2px",
     position: "relative",
   },
   sectionLink: {
@@ -78,6 +78,11 @@ const FeaturedSectionsBar = ({
       <div key={-2} className={classes.sectionListItem}>
         <Link to="/recruitments" className={classes.sectionLink}>
            Recruitments
+        </Link>
+      </div>
+      <div key={-3} className={classes.sectionListItem}>
+        <Link to="/spec-games" className={classes.sectionLink}>
+           SpecGames
         </Link>
       </div>
       {/*

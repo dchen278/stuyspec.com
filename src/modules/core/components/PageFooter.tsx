@@ -5,6 +5,7 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 import DescriptionLinks from "./DescriptionLinks";
 import { Description } from "../types";
+import { Instagram, Facebook, Linkedin, Spotify } from "../icons";
 
 const styles = {
   PageFooter: {
@@ -59,7 +60,51 @@ const styles = {
     fontSize: "30px",
     fontStyle: "normal",
     fontWeight: 400,
+    paddingRight: '10px',
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none"
+    }
+  },
+  Instagram: {
+    color: "#000",
+    fontSize: "25px",
+    fontWeight: 400,
     paddingTop: "10px",
+    paddingRight: '10px',
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none"
+    }
+  },
+  Facebook: {
+    color: "#000",
+    fontSize: "25px",
+    fontWeight: 400,
+    paddingTop: "10px",
+    paddingRight: '10px',
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none"
+    }
+  },
+  Spotify: {
+    color: "#000",
+    fontSize: "25px",
+    fontWeight: 400,
+    paddingTop: "10px",
+    paddingRight: '10px',
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none"
+    }
+  },
+  Linkedin: {
+    color: "#000",
+    fontSize: "25px",
+    fontWeight: 400,
+    paddingTop: "10px",
+    paddingRight: '10px',
     "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none"
@@ -106,11 +151,11 @@ const styles = {
     sectionFlex: {
       flexWrap: "nowrap",
       height: "auto",
-      "& > div:nth-child(10) ~ div": {
-        // shows first ten section blocks
+      "& > div:nth-child(9) ~ div": {
+        // shows first nine section blocks
         display: "none"
       },
-      "& > div:nth-child(11)": {
+      "& > div:nth-child(9)": {
         borderBottom: "1px solid #ddd"
       }
     },
@@ -169,6 +214,27 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           <Link to="/" className={classes.theSpectator}>
             The Spectator
           </Link>
+          <a href="https://open.spotify.com/show/1D0i5KdRFdMNNUwsKVfpYb" 
+              className={classes.Spotify}>
+            <Spotify />
+          </a>
+          <a href="https://www.instagram.com/stuyspectator/" 
+              className={classes.Instagram}>
+            <Instagram />
+          </a>
+          <a href="https://www.facebook.com/stuyspectator" 
+              className={classes.Facebook}>
+            <Facebook />
+          </a>
+          {/* {Might add back later} */}
+          {/* <a href="https://github.com/stuyspec" 
+              className={classes.Github}>
+            <Github/>
+          </a> */}
+          <a href="https://www.linkedin.com/company/the-stuyvesant-spectator" 
+              className={classes.Linkedin}>
+            <Linkedin/>
+          </a>
         </Col>
         <Col
           xs={12}

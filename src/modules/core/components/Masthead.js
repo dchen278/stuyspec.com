@@ -10,6 +10,7 @@ import { Search } from "../icons";
 import { openSidebar } from "../actions";
 import { openSubscriptionModal } from "../../accounts/actions";
 import { FeaturedSectionsBar } from "../../sections/components";
+import DarkModeToggle from "./DarkModeToggle";
 
 const styles = {
   Masthead: {
@@ -32,7 +33,7 @@ const styles = {
       textDecoration: "none",
     },
     "@media (min-width: 768px)": {
-      fontSize: "65px"
+      fontSize: "65px",
     },
   },
   userTools: {
@@ -49,7 +50,7 @@ const styles = {
     position: "relative",
   },
   FeaturedSectionsBarContainer: {
-    borderTop: "1px solid black",
+    borderTop: "1px solid",
     borderBottom: "1px solid gray",
     width: "100%",
     marginBottom: "2rem",
@@ -64,6 +65,10 @@ const styles = {
     "&:hover, &:active, &:focus": {
       color: "#000",
     },
+  },
+  toggle: {
+    marginRight: "20%",
+    marginTop: "3%",
   },
   searchLink: {
     color: "#000",
@@ -112,7 +117,12 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
               </Link>
             </div>
           ) : (
-            <SubscribeButton onClick={openSubscriptionModal} />
+            <>
+              <div className={classes.toggle}>
+                <DarkModeToggle />
+              </div>
+              <SubscribeButton onClick={openSubscriptionModal} />
+            </>
           )}
           {/*!session && (
             <div className={classes.userTools}>
@@ -126,19 +136,19 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
       <div className={classes.FeaturedSectionsBarContainer}>
         <FeaturedSectionsBar />
       </div>
-
     </Grid>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   session: state.accounts.session,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ openSubscriptionModal, openSidebar }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(Masthead),
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(injectSheet(styles)(Masthead));
