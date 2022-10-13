@@ -187,7 +187,7 @@ const Command = styled.button`
     outline: none;
   }
 `;
-//#B3DAF1
+// #B3DAF1
 const CrosswordWrapper = styled.div`
   margin-top: 2em;
   max-width: 200em;
@@ -267,7 +267,7 @@ function Crossword1() {
   // We don't really *do* anything with callbacks from the Crossword component,
   // but we can at least show that they are happening.  You would want to do
   // something more interesting than simply collecting them as messages.
-  const [messages, setMessages] = useState([]);
+  const [, setMessages] = useState([]);
 
   const addMessage = useCallback((message) => {
     setMessages((m) => m.concat(`${message}\n`));
@@ -321,7 +321,7 @@ function Crossword1() {
       <p>
         <span className="contributor">By</span>
         <a
-          href={window.location.origin + "/contributors/the-editorial-board"}
+          href={`${window.location.origin}/contributors/the-editorial-board`}
           className="contributor"
         >
           The Editorial Board

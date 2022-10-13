@@ -2,27 +2,35 @@ const initialState = [
   {
     company: "Kweller Prep",
     filename: "kweller.png",
-    url: '/ad/kweller'
+    url: "/ad/kweller",
   },
   {
-    company: "Aim Plus Education",
-    filename: "aimpluseducation.png",
-    url: '/ad/aimplus'
+    company: "Georgetown University",
+    filename: "Georgetown.png",
+    url: "/ad/georgetown",
   },
   {
-    company: "The Tutorverse",
-    filename: "tutorverse.jpg",
-    url: '/ad/tutorverse'
+    company: "Parsons Paris",
+    filename: "Parsons.png",
+    url: "/ad/parsons",
   },
   {
-    company: "Manhattan Ace",
-    filename: "manhattanace.png",
-    url: "/ad/manhattanace"
-  }  
+    company: "Columbia University",
+    filename: "Columbia.png",
+    url: "/ad/columbia",
+  },
+  {
+    company: "University of Rochester",
+    filename: "Rochester.png",
+    url: "/ad/rochester",
+  },
+  {
+    company: "Don't Sweat the Essay",
+    filename: "DontSweatTheEssay.png",
+    url: "/ad/dontsweattheessay",
+  },
 ];
 
-const reducer = (state = { ...initialState }) => {
-  return state;
-};
+const reducer = (state = { ...initialState }) => state;
 
 export default reducer;

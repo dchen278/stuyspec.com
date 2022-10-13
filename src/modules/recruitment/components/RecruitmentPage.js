@@ -1,6 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
-import ReactPlayer from "react-player/youtube"
+import ReactPlayer from "react-player/youtube";
 
 import * as constants from "../constants";
 
@@ -25,7 +25,7 @@ const styles = {
   SectionTitle: {
     color: "#000",
     fontFamily: "Canela",
-    margin: "10px",
+    marginTop: "30px",
     textAlign: "center",
   },
   SectionText: {
@@ -34,7 +34,7 @@ const styles = {
     fontSize: "1.3em",
     lineHeight: "1.4em",
     margin: "13px",
-    padding: "3px",
+    padding: "0 10 5 10",
     textAlign: "justify",
   },
   Deadline: {
@@ -53,7 +53,7 @@ const styles = {
     boxShadow: "0px 2.5px 5px 2.5px lightgray",
     flexGrow: "1",
     marginBottom: "25px",
-    maxWidth: "350px",
+    maxWidth: "450px",
     maxHeight: "1300px",
     position: "relative",
   },
@@ -100,10 +100,10 @@ const styles = {
     width: "50%",
     paddingBottom: "",
     textAlign: "center",
-  }
+  },
 };
 
-const RecruitmentPage = ({ classes }) => {
+function RecruitmentPage({ classes }) {
   return (
     <div>
       <h1 className={classes.Title}>Recruitments</h1>
@@ -112,13 +112,13 @@ const RecruitmentPage = ({ classes }) => {
         student journalism.
       </p>
       <ReactPlayer
-        url="https://youtu.be/8MvOzTSwwCs"
-        controls={true}
+        url="https://youtu.be/CDZauduRFAU"
+        controls
         className={classes.Video}
       />
-      <hr></hr>
+      <hr />
       <div className={classes.FlexContainer}>
-        {constants.SECTIONS.map(section => (
+        {constants.SECTIONS.map((section) => (
           <StyledSection
             name={section.name}
             imageLink={section.imageLink}
@@ -132,44 +132,58 @@ const RecruitmentPage = ({ classes }) => {
       </div>
     </div>
   );
-};
+}
 
-const Quote = ({ classes, text, source }) => {
+function Quote({ classes, text, source }) {
   return (
     <div className={classes.Quote}>
       <p className={classes.QuoteText}>
-        <i>{"“" + text + "”"}</i>
+        <i>{`“${text}”`}</i>
       </p>
       <p className={classes.QuoteText}>
-        <i>{"―" + source}</i>
+        <i>{`―${source}`}</i>
       </p>
     </div>
   );
-};
+}
 
 const StyledQuote = injectSheet(styles)(Quote);
 
-const Section = ({ classes, imageLink, name, description, quotes, deadline, app }) => {
-  const appLink = (app) ?
-      <a className={classes.App} href={app} >
-         {" "}
-         Click here to apply for {name}!{" "}
-      </a>:
-      <p className={classes.App}>Coming Soon!</p>
+function Section({
+  classes,
+  imageLink,
+  name,
+  description,
+  quotes,
+  deadline,
+  app,
+}) {
+  const appLink = app ? (
+    <a className={classes.App} href={app}>
+      {" "}
+      Click here to apply for {name}!{" "}
+    </a>
+  ) : (
+    <p className={classes.App}>Recruitments will be hosted in the fall!</p>
+  );
 
   return (
     <div className={classes.Section}>
       <h1 className={classes.SectionTitle}>{name}</h1>
-      {imageLink && <img src={imageLink} className={classes.Image} alt="Quote"/>}
+      {imageLink && (
+        <img src={imageLink} className={classes.Image} alt="Quote" />
+      )}
       <p className={classes.SectionText}>{description}</p>
-      {quotes.map(({ text, source }) => {
-        return <StyledQuote text={text} source={source} />;
-      })}
+      {quotes.map(({ text, source }) => (
+        <StyledQuote text={text} source={source} />
+      ))}
       {appLink}
-      <p className={classes.Deadline}><b>{deadline}</b></p>
+      <p className={classes.Deadline}>
+        <b>{deadline}</b>
+      </p>
     </div>
   );
-};
+}
 
 const StyledSection = injectSheet(styles)(Section);
 

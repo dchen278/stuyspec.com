@@ -36,19 +36,19 @@ const styles = {
   },
 };
 
-const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
-  let sidebarElements = [];
+function SidebarContent({ classes, session, sections, closeSidebar }) {
+  const sidebarElements = [];
   sidebarElements.push(
     <Link
       className={classes.sidebarSectionLink}
       key={-1}
       onClick={closeSidebar}
-      to={"/"}
+      to="/"
     >
       Home
-    </Link>,
+    </Link>
   );
-  sections.forEach(section => {
+  sections.forEach((section) => {
     sidebarElements.push(
       <Link
         className={classes.sidebarSectionLink}
@@ -57,23 +57,22 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
         to={section.permalink}
       >
         {section.name}
-      </Link>,
+      </Link>
     );
     /* We want a line separating the writing sections from the non-writing
      * sections and one separating the non-writing sections from the user
      * account options.
      */
-    if (section.name === "Spec+") 
-    {
+    if (section.name === "Spec+") {
       sidebarElements.push(
-        <hr className={classes.divider} key={section.id + 100} />,
+        <hr className={classes.divider} key={section.id + 100} />
       );
     }
   });
 
   sidebarElements.push(<hr className={classes.divider} key={-4} />);
 
-  /*if (session) {
+  /* if (session) {
     sidebarElements.push(
       <Link
         className={classes.sidebarSectionLink}
@@ -95,7 +94,7 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
         Log In
       </Link>,
     );
-  }*/
+  } */
   sidebarElements.push(
     <Link
       className={classes.sidebarSectionLink}
@@ -104,8 +103,8 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
       to="/spec-games"
     >
       SpecGames
-    </Link>,
-  )
+    </Link>
+  );
   sidebarElements.push(
     <Link
       className={classes.sidebarSectionLink}
@@ -114,8 +113,8 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
       to="/recruitments"
     >
       Recruitments
-    </Link>,
-  )
+    </Link>
+  );
   sidebarElements.push(
     <Link
       className={classes.sidebarSectionLink}
@@ -124,19 +123,19 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
       to="/search"
     >
       Search
-    </Link>,
+    </Link>
   );
   return <div>{sidebarElements}</div>;
-};
+}
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   session: state.accounts.session,
 });
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ closeSidebar }, dispatch);
-};
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ closeSidebar }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(SidebarContent),
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(injectSheet(styles)(SidebarContent));
